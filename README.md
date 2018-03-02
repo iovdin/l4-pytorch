@@ -2,6 +2,8 @@
 This is PyTorch implementation of
 ["L4: Practical loss-based stepsize adaptation for deep learning"](https://arxiv.org/abs/1802.05074)  By [Michal Rolínek](https://scholar.google.de/citations?user=DVdSTFQAAAAJ&hl=en), [Georg Martius](http://georg.playfulmachines.com/). 
 
+To install put ```l4.py``` to working directory
+
 
 ```python
 from l4 import L4
