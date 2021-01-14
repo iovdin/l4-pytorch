@@ -32,10 +32,10 @@ class L4():
     if loss is None:
       raise RuntimeError('L4: loss is required to step')
 
-    if loss.data[0] < 0:
+    if loss.data.item() < 0:
       raise RuntimeError('L4: loss must be non negative')
 
-    if math.isnan(loss.data[0]):
+    if math.isnan(loss.data.item()):
       return 
 
     # copy original data for parameters
@@ -70,9 +70,9 @@ class L4():
         
     
     if 'lmin' not in state:
-      state['lmin'] = loss.data[0] * 0.75
+      state['lmin'] = loss.data.item() * 0.75
     
-    lmin = min(state['lmin'], loss.data[0])
+    lmin = min(state['lmin'], loss.data.item())
     
     gamma = state['gamma']
     tau = state['tau']
@@ -91,7 +91,7 @@ class L4():
         v = -p.data.clone()
         inner_prod += torch.dot(grad.view(-1), -p.data.view(-1))
 
-    lr = alpha * (loss.data[0] - lmin * gamma) / (inner_prod + eps)
+    lr = alpha * (loss.data.item() - lmin * gamma) / (inner_prod + eps)
     state['lr'] = lr
     for group in self.optimizer.param_groups:
       for p in group['params']:
